@@ -1,14 +1,12 @@
 # import socket
 
-from calculator import Interpreter
+from src.calculator import Interpreter
 
 
 def main():
     interpreter = Interpreter()
     with open("operations.txt", "r") as f:
-        for i, op in enumerate(f):
-            # print(op)
-            # print(i)
+        for op in f:
             try:
                 interpreter.interpret(arithmetic_expression=op)
             except Exception:

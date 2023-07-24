@@ -1,7 +1,7 @@
 import pytest
 
-from calculator import Interpreter
-
+from src.calculator import Interpreter
+from src.exceptions import InterpreterException,ArithmeticSyntaxError
 
 def test_interpreter_result():
     interpreter = Interpreter()
@@ -16,7 +16,12 @@ def test_interpreter_result():
 
 def test_invalid_input():
     honey_pot = "import sys; sys.exit()"
+    invalid_expression_syntax = "9 - 2 +* 6"
+
     interpreter = Interpreter()
 
-    with pytest.raises(expected_exception=Exception):
+    with pytest.raises(expected_exception=InterpreterException):
         interpreter.interpret(arithmetic_expression=honey_pot)
+
+    with pytest.raises(expected_exception=ArithmeticSyntaxError):
+        interpreter.interpret(arithmetic_expression=invalid_expression_syntax)

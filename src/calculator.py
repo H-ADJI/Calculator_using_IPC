@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Generic, Optional, TypeVar
 
+from src.exceptions import ArithmeticSyntaxError, InterpreterException
+
 
 class Type(str, Enum):
     NUMBER = "NUMBER"
@@ -56,41 +58,6 @@ class BinaryTreeNode(Generic[T]):
 class AbstractSyntaxTree:
     root: BinaryTreeNode
 
-    @staticmethod
-    def level_order_traversal(root):
-        if not root:
-            return []
-
-        queue = [root]
-        result = []
-
-        while queue:
-            current = queue.pop(0)
-            result.append(current)
-
-            if current:
-                queue.append(current.left)
-                queue.append(current.right)
-
-        return result
-
-    def convert_to_complete_binary_tree(self):
-        nodes = self.level_order_traversal(self.root)
-        print([n.data for n in nodes if n])
-        # Create a new root node using the first node from the list
-        new_root: BinaryTreeNode = nodes.pop(0)
-
-        # Reassign children for each node in a left-to-right manner
-        for node in nodes:
-            if node:
-                if not new_root.left:
-                    new_root.left = node
-                elif not new_root.right:
-                    new_root.right = node
-                    new_root = nodes.pop(0)
-
-        self.root = new_root
-
 
 class Interpreter:
     OPERATORS = {Type.DIV, Type.MINUS, Type.PLUS, Type.MULT}
@@ -135,15 +102,13 @@ class Interpreter:
                     self.tokens.append(Token(value=character, type=Type.PLUS))
                 case _:
                     self.__consume_digits_buffer()
-                    raise Exception("unsuported case")
+                    raise InterpreterException
         self.__consume_digits_buffer()
         return self.tokens
 
     def __syntax_analysis(self, tokens: list[Token]) -> BinaryTreeNode:
         if len(self.tokens) % 2 == 0:
-            print(len(self.tokens))
-            print(self.tokens)
-            raise Exception("The arithmetic expression is not syntaxically correct")
+            raise ArithmeticSyntaxError
         if len(tokens) == 1:
             return BinaryTreeNode(data=tokens[0])
         lowest_priority = float("inf")
@@ -195,13 +160,7 @@ class Interpreter:
     def interpret(self, arithmetic_expression: str):
         self.tokens = []
         self.expr = arithmetic_expression
-
-        try:
-            tokens = self.__lexical_analysis()
-        except Exception:
-            raise Exception(
-                "Interpretation error something is wrong with the expression"
-            )
+        tokens = self.__lexical_analysis()
         self.abstract_syntax_tree = AbstractSyntaxTree(
             root=self.__syntax_analysis(tokens=tokens)
         )
