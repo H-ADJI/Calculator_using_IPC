@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Generic, Optional, TypeVar
 
-from src.exceptions import ArithmeticSyntaxError, InterpreterException
+from exceptions import ArithmeticSyntaxError, InterpreterException
 
 
 class Type(str, Enum):
