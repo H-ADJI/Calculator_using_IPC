@@ -1,7 +1,7 @@
 import pytest
 
-from src.calculator import CalculatorInterpreter
-from src.exceptions import ArithmeticSyntaxError, InterpreterException
+from calculator import CalculatorInterpreter
+from exceptions import ArithmeticSyntaxError, InterpreterException
 
 
 def test_interpreter_result():
@@ -25,4 +25,6 @@ def test_invalid_input():
         calculator_interpreter.interpret(arithmetic_expression=honey_pot)
 
     with pytest.raises(expected_exception=ArithmeticSyntaxError):
-        calculator_interpreter.interpret(arithmetic_expression=invalid_expression_syntax)
+        calculator_interpreter.interpret(
+            arithmetic_expression=invalid_expression_syntax
+        )
