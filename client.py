@@ -1,5 +1,8 @@
 import socket
+import time
 from typing import Generator
+
+from constants import EOO, MSG_SIZE, SERVER_PORT
 
 
 def arithmetic_operations_generator(
@@ -10,31 +13,23 @@ def arithmetic_operations_generator(
             yield op
 
 
-HEADER_SIZE = 64
-
-
 def send_with_protocol(client: socket.socket, message: str):
-    message = message.strip().encode()
-    message_length = len(message)
-    length_header = str(message_length).encode()
-    client.send(
-        length_header + b" " * (HEADER_SIZE - len(length_header))
-    )  # send the length of the message
-    client.send(message)  # send the message
+    message = message.strip()
+    message = f"{message:<{MSG_SIZE}}"
+    client.send(bytes(message, "utf-8"))  # send the length of the message
 
 
 def client_program():
     # Server that this client will connect to
     server_host = socket.gethostname()
-    server_port = 5555
     client_socket = socket.socket()
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-        client_socket.connect((server_host, server_port))  # connecting to the server
+        client_socket.connect((server_host, SERVER_PORT))  # connecting to the server
 
-        for operation in arithmetic_operations_generator(source_file="test_op.txt"):
+        for operation in arithmetic_operations_generator():
+            time.sleep(0.001)
             send_with_protocol(client=client_socket, message=operation)
-
-        send_with_protocol(client=client_socket, message="END_OF_OPERATIONS")
+        send_with_protocol(client=client_socket, message=EOO)
 
 
 if __name__ == "__main__":

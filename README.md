@@ -1,4 +1,16 @@
-# Technical test sekoia
+# Technical assignment sekoia
+
+Made by HADJI KHALIL (aka H-ADJI)
+
+## Objectif
+
+Parallelised mathematical calculation using a home made Interpreter.
+
+## High level architecture
+
+![architecture image](/assets/IPC_calculator.png "architecture")
+
+## Guidelines
 
 - Develop a client which is able to send the information given at operations.7z:
   - send the information using sockets to the service,

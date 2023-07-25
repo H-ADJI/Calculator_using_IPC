@@ -59,7 +59,7 @@ class AbstractSyntaxTree:
     root: BinaryTreeNode
 
 
-class Interpreter:
+class CalculatorInterpreter:
     OPERATORS = {Type.DIV, Type.MINUS, Type.PLUS, Type.MULT}
 
     def __init__(self) -> None:
