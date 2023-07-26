@@ -8,6 +8,8 @@ from loguru import logger
 from calculator import CalculatorInterpreter
 from constants import EOO, MSG_SIZE, SERVER_PORT
 
+logger.add("results.log", level="SUCCESS", rotation="50MB")
+
 
 class CalculationWorker(Process):
     def __init__(
@@ -78,7 +80,6 @@ class CalculationServer:
 
     def log_results(self, event: Event):
         event.wait()
-        logger.debug("STARTING LOGGING")
         for rounb_robin in cycle(range(self.worker_count)):
             if not (
                 self.results_pipes[rounb_robin][0].poll(timeout=1)
@@ -86,7 +87,7 @@ class CalculationServer:
             ):
                 break
             result = self.results_pipes[rounb_robin][0].recv()
-            logger.info(result)
+            logger.success(result)
         for worker in self.workers:
             worker.join()
 
