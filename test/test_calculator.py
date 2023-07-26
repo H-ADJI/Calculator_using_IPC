@@ -6,7 +6,7 @@ from exceptions import ArithmeticSyntaxError, InterpreterException
 
 def test_interpreter_result():
     calculator_interpreter = CalculatorInterpreter()
-    with open("operations.txt", "r") as f:
+    with open("test/test_operations.txt", "r") as f:
         for i, op in enumerate(f):
             try:
                 result = calculator_interpreter.interpret(arithmetic_expression=op)
