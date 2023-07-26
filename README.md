@@ -14,6 +14,7 @@ Parallelised mathematical calculation using a home made Interpreter running on m
 
 ### Requirements
 
+- Linux based OS, Ubuntu 22.04.2 LTS x86_64 is the one used for dev.
 - Python version 3.x the version used for dev environment is 3.10.6
 - add your python alias to the Makefile for ease of use 
 
