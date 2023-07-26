@@ -70,7 +70,7 @@ make testing
 The component holding the logic for reading the arithmetic operations and computing the result. It is a basic implementation of an interpreter that uses the following pipeline :
 ![Pipeline image](/assets/InterpreterPipeline.png "architecture")
 
-- The arithmetic operations string is feed to the **parser** that **tokenize** the text into the defined symboles of the language (math operations in our case).
+- The arithmetic operations string is feed to the **tokenizer** that **tokenize** the text into the defined symboles of the language (math operations in our case).
 - The symboles are feed to a **parser** that generate an **AST** using the following logic :
   - operations with higher priority goes the base of the tree
   - operations with lower priority goes the root of the tree
