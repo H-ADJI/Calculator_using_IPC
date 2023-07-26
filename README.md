@@ -92,7 +92,7 @@ The component holding the logic for reading the arithmetic operations and comput
 
 This component is responsible for managing and running the calculation and it's composed of :
 
-- The main process : a manager process that handles clients connection and delegates the calculations to worker process.
+- The main process : a manager process with an open socket that handles clients connection and delegates the calculations to worker process.
 - the worker processes is the process running the calculation interpreter instance.
 - The communication is done using :
   - Operations Pipes : This is a kind of Pipe where the main / manager process writes the operations using one pipe connection and the worker process consumes those operations
