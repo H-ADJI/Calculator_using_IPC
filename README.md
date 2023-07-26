@@ -4,13 +4,78 @@ Made by HADJI KHALIL (aka H-ADJI)
 
 ## Objectif
 
-Parallelised mathematical calculation using a home made Interpreter.
+Parallelised mathematical calculation using a home made Interpreter running on multiple python processes.
 
 ## High level architecture
 
 ![architecture image](/assets/IPC_calculator.png "architecture")
 
-## Guidelines
+## Project Setup
+
+### Requirements
+
+- Python version 3.x the version used for dev environment is 3.10.6
+- add your python alias to the Makefile for ease of use 
+
+```sh
+py=python
+```
+
+or
+
+```sh
+py=python3
+```
+
+### Dependencies
+
+- Make sure you're inside the project folder
+- Create a virtual env to isolate dependencies from conflicting with other project using :
+
+```sh
+python -m venv venv
+```
+
+- Install dependencies using :
+
+```sh
+pip install -r requirements.txt
+```
+
+### Running the project
+
+- **Run the server** :
+
+```sh
+make server
+```
+
+- **Run the client** :
+
+```sh
+make client
+```
+
+- **Run tests** :
+
+```sh
+make testing
+```
+## Implementation details
+
+### Calculation interpreter
+The component holding the logic for reading the arithmetic operations and computing the result. It is a basic implementation of an interpreter that uses the following pipeline :
+![Pipeline image](/assets/InterpreterPipeline.png "architecture")
+
+- The arithmetic operations string is feed to the parser that tokenize the text into the defined symboles of the language (math operations in our case)
+- The symboles are feed to a parser that generate an AST using the following logic :
+  - operations with higher priority goes the base of the tree
+  - operations with lower priority goes the root of the tree
+
+<p align="center"><img src="assets/AST_example2.png" /></p>
+
+
+## Project Guidelines
 
 - Develop a client which is able to send the information given at operations.7z:
   - send the information using sockets to the service,
