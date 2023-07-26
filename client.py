@@ -1,5 +1,4 @@
 import socket
-import time
 from typing import Generator
 
 from constants import EOO, MSG_SIZE, SERVER_PORT
@@ -27,8 +26,6 @@ def client_program():
         client_socket.connect((server_host, SERVER_PORT))  # connecting to the server
 
         for operation in arithmetic_operations_generator():
-            # because server seem to be loosing ordering of the data somehow
-            time.sleep(0.001)
             send_with_protocol(client=client_socket, message=operation)
         send_with_protocol(client=client_socket, message=EOO)
 
