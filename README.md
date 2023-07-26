@@ -71,9 +71,7 @@ The component holding the logic for reading the arithmetic operations and comput
 - The symboles are feed to a parser that generate an AST using the following logic :
   - operations with higher priority goes the base of the tree
   - operations with lower priority goes the root of the tree
-
-<p align="center"><img src="assets/AST_example2.png" /></p>
-
+![Pipeline image](/assets/AST_example2.png "architecture")
 
 ## Project Guidelines
 
