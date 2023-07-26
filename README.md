@@ -1,4 +1,4 @@
-# Technical assignment sekoia
+# Parallel Calculations 
 
 Made by HADJI KHALIL (aka H-ADJI)
 
