@@ -1,6 +1,4 @@
-# Parallel Calculations 
-
-Made by HADJI KHALIL (aka H-ADJI)
+# Parallel Calculations
 
 ## Objectif
 
@@ -16,7 +14,7 @@ Parallelised mathematical calculation using a home made Interpreter running on m
 
 - Linux based OS, Ubuntu 22.04.2 LTS x86_64 is the one used for dev.
 - Python version 3.x the version used for dev environment is 3.10.6
-- add your python alias to the Makefile for ease of use 
+- add your python alias to the Makefile for ease of use
 
 ```sh
 py=python
@@ -104,23 +102,9 @@ This component is responsible for managing and running the calculation and it's 
 
 - The strategy used to distribute the load over the different process is **Round Robin**, where the manager process cyclicaly send operations to each worker process operation's pipe.
 - Possible Optimization :
+
   - We could handle multiple connections by using a seprate thread to handle each connection, so that new connections do not block the manager process.
   - Use a more advanced scheduling algorithms that takes in consideraton process load metrics instead of using the simple **round robin** algorithm to distribute the load over processes.
 
 - Finally the results that are read by the manager process from the pipes are logged into stdout and to a results.log file.
 - Handling the client connection and the calculation output to stdout are done in different threads so that operations are logged as soon as a connection is made.
-
-## Project Guidelines
-
-- Develop a client which is able to send the information given at operations.7z:
-  - send the information using sockets to the service,
-  - receive information through the sockets and store the results in a file,
-
-- Develop a service in Python which is built with the following features:
-  - receive information using sockets,
-  - It is built by 2 different processes (at least). Consider having more processes to speed calculations,
-  - Processes must be able to exchange information using pipes. Please DO NOT use Threading or Pool,
-  - Parent process must create and destroy child process for the arithmetic operations given at operations.7z,
-  - Once the arithmetic operation is finished on the second process, such process should be destroyed by the parent process,
-  - Consider that operations should not be calculated using eval(),
-  - Consider using logging instead of console prints.
