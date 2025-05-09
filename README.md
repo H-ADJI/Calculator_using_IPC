@@ -1,4 +1,4 @@
-# Parallel Calculations
+# Calculation Interpreter
 
 ## Objectif
 
